@@ -14,6 +14,7 @@ function Header() {
                 Some Catchy App Name or Logo
             </Link>
             <nav>
+                {user && <NavLink to="/post">Post</NavLink>}
                 {/* Todo: Change user.username to link to the profile page when done*/}
                 {!user ? <NavLink to="/login">Login</NavLink> : user.username} 
             </nav>

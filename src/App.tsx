@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import Login from './pages/Login';
 import { User, UserContext } from './context/userContext';
+import CreatePost from './pages/Post';
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Header/>
         <Routes>
           <Route path="/login" element={<Login setUser={setUser}/>}/>
+          <Route path="/post" element={<CreatePost/>}/>
         </Routes>
       </UserContext.Provider>
     </>

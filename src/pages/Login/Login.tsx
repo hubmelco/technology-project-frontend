@@ -30,7 +30,7 @@ function Login({setUser}: props) {
     }
 
     return (
-        <main>
+        <main id="log-in">
             <h1>Log In</h1>
             <LoginForm onSubmit={login} error={error}/>
             {displaySuccess && <h4>Successfully Logged In, Returning to homepage in 3 seconds</h4>}

@@ -47,8 +47,8 @@ describe("Login Page", () => {
         render(<Login/>);
 
         const submitButton = screen.getByRole("button");
-        const usernameInput = screen.getByLabelText("Username:");
-        const passwordInput = screen.getByLabelText("Password:");
+        const usernameInput = screen.getByLabelText("Username*");
+        const passwordInput = screen.getByLabelText("Password*");
 
         expect(submitButton).toBeDefined();
         expect(usernameInput).toBeDefined();

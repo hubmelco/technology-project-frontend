@@ -17,6 +17,5 @@ nav {
 #home {
     /* For now its a link, maybe later we could make a logo for the site*/
     text-decoration: none;
-    font-size: 1.125rem;
     color: var(--secondary-color);
 }
