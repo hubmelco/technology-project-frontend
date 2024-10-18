@@ -1,7 +1,7 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import "./Login.css";
+import "./Register.css";
 import LoginForm from "../../components/LoginForm";
 import fetch from "../../utilities/fetch";
 
@@ -9,15 +9,15 @@ interface props {
     setUser: Function,
 }
 
-function Login({setUser}: props) {
+function Register({ setUser }: props) {
 
     const navigate = useNavigate();
     const [error, setError] = useState();
     const [displaySuccess, setDisplaySuccess] = useState(false);
 
-    async function login(username: string, password: string) {
+    async function register(username: string, password: string) {
         try {
-            const {token, user} = await fetch("post", "/users/login", {username, password});
+            const { token, user } = await fetch("post", "/users/", { username, password });
             localStorage.setItem("token", token);
             setUser(user);
             setDisplaySuccess(true);
@@ -25,17 +25,17 @@ function Login({setUser}: props) {
                 navigate("/"); // Don't use window.location otherwise the page refreshes
             }, 3000);
         } catch (err: any) {
-            setError(err.error); 
+            setError(err.error);
         }
     }
 
     return (
         <main>
-            <h1>Log In</h1>
-            <LoginForm onSubmit={login} error={error}/>
-            {displaySuccess && <h4>Successfully Logged In, Returning to homepage in 3 seconds</h4>}
+            <h1>Register</h1>
+            <LoginForm onSubmit={register} error={error} />
+            {displaySuccess && <h4>Successfully Registered Account, Returning to homepage in 3 seconds</h4>}
         </main>
     )
 }
 
-export default Login;
+export default Register;

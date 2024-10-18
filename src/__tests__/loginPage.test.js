@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 import Login from "../pages/Login";
 import fetch from "../utilities/fetch";
@@ -6,9 +6,13 @@ import fetch from "../utilities/fetch";
 jest.mock("../utilities/fetch");
 jest.mock("react-router-dom");
 describe("Login Page", () => {
-    test("Renders error if request fails", async () => {
+    let login;
+    function setUser() {}
+    beforeEach(() => {
+        login = render(<Login setUser={setUser} />);
+    });
 
-        const login = render(<Login/>);
+    test("Renders error if request fails", async () => {
         const error = {
             error: "invalid username/password"
         }
@@ -18,48 +22,47 @@ describe("Login Page", () => {
         const submitButton = screen.getByRole("button");
 
         let errorElement = screen.queryByText(error.error);
-        expect(errorElement).toBeFalsy();
+        expect(errorElement).toBeNull();
 
         fireEvent.click(submitButton);
 
-        errorElement = screen.queryByText(error.error);
-        expect(errorElement).toBeDefined();
+        await waitFor(() => {
+            const errorElementPost = screen.queryByText(error.error);
+            expect(errorElementPost).toBeInTheDocument();
+        });
     });
 
     test("Renders success if request succeeds", async () => {
-        const login = render(<Login/>);
         const successText = "Successfully Logged In, Returning to homepage in 3 seconds";
 
         fetch.mockResolvedValueOnce({token: "something", user: {username: "asd", role: "admin"}});
 
         const submitButton = screen.getByRole("button");
 
-        let successElement = screen.queryByText(successText);
-        expect(successElement).toBeFalsy();
+        const successElementPre = screen.queryByText(successText);
+        expect(successElementPre).toBeNull();
 
         fireEvent.click(submitButton);
 
-        successElement = screen.queryByText(successText);
-        expect(successElement).toBeDefined();
+        await waitFor(() => {
+            const successElementPost = screen.queryByText(successText);
+            expect(successElementPost).toBeInTheDocument();
+        });
     });
 
     test("Renders form elements for username, password, and submit", () => {
-        render(<Login/>);
-
         const submitButton = screen.getByRole("button");
         const usernameInput = screen.getByLabelText("Username:");
         const passwordInput = screen.getByLabelText("Password:");
 
-        expect(submitButton).toBeDefined();
-        expect(usernameInput).toBeDefined();
-        expect(passwordInput).toBeDefined();
+        expect(submitButton).toBeInTheDocument();
+        expect(usernameInput).toBeInTheDocument();
+        expect(passwordInput).toBeInTheDocument();
     });
 
     test("renders title for page", () => {
-        render(<Login/>);
-
         const title = screen.getByText("Log In");
 
-        expect(title).toBeDefined();
+        expect(title).toBeInTheDocument();
     });
 })
