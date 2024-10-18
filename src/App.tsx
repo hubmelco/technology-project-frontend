@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import Header from './components/Header';
 import Login from './pages/Login';
+import Profile from './pages/Profile';
 import { User, UserContext } from './context/userContext';
 
 
@@ -15,6 +16,7 @@ function App() {
         <Header/>
         <Routes>
           <Route path="/login" element={<Login setUser={setUser}/>}/>
+          <Route path="/profile" element={<Profile/>}/>
         </Routes>
       </UserContext.Provider>
     </>
