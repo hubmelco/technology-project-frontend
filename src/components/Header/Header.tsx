@@ -11,17 +11,16 @@ function Header() {
     return(
         <header>
             <Link to="/" id="home">
-                Some Catchy App Name or Logo
+                The Song Study Site
             </Link>
             <nav>
                 {user && <NavLink to="/post">Post</NavLink>}
-                {/* Todo: Change user.username to link to the profile page when done*/}
                 {!user ? 
                     <>
                         <NavLink to="/login">Login</NavLink>
                         <NavLink to="/register">Register</NavLink>
                     </> : 
-                    user.username} 
+                    <NavLink to="/profile">Profile</NavLink>} 
             </nav>
         </header>
     )
