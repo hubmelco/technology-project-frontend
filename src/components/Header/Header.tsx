@@ -13,6 +13,9 @@ function Header() {
             <Link to="/" id="home">
                 Some Catchy App Name or Logo
             </Link>
+            <Link to="/search">
+                Search
+            </Link>
             <nav>
                 {user && <NavLink to="/post">Post</NavLink>}
                 {/* Todo: Change user.username to link to the profile page when done*/}
